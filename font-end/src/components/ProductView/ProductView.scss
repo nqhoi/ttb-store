@@ -1,0 +1,36 @@
+.Product-View {
+  .ant-card-body {
+    padding: 12px;
+  }
+  &-price {
+    &--main {
+      letter-spacing: 1px;
+      color: #155bde;
+    }
+    &--nodiscount {
+      letter-spacing: 1px;
+      text-decoration: line-through;
+      color: #828384;
+    }
+    &--discount {
+      color: #3c902b;
+    }
+
+    &--contact {
+      background-color: #eeeeff;
+      color: #155bde;
+      padding: 2px 8px;
+      width: -webkit-fit-content;
+      width: -moz-fit-content;
+      width: fit-content;
+      font-weight: 500;
+    }
+  }
+  &-stock {
+    color: #d98929;
+  }
+  &:hover {
+    transform: scale(1.01);
+    transition: all 0.35s;
+  }
+}

@@ -1,0 +1,53 @@
+.Discount-List {
+  border-radius: 8px;
+  border: 1px solid rgb(230, 230, 230);
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 575px;
+  &.bg {
+    &-0 {
+      background: url("https://res.cloudinary.com/tuan-cloudinary/image/upload/v1608136122/saleOff/laptop_baavwf.jpg");
+    }
+    &-1 {
+      background: url("https://lh3.googleusercontent.com/i3t_K2rf0r4dFcvJkY5zjCZH5Bl_52ZGrW_tMSXIFvHl33W6nvM7S3u41yFPz3FgIy0GaXFyLwzWw428vNXJVt9bzwy3b-j4=w1232");
+    }
+    &-2 {
+      background: url("https://res.cloudinary.com/tuan-cloudinary/image/upload/v1608136122/saleOff/msas_xdbc6o.jpg");
+    }
+    &-3 {
+      background: url("https://lh3.googleusercontent.com/K7svRHaL6ZFJ4Mkh-kcd4JEU9v98v5CDPHYYpdKlpYA4M_ARKE7hkb9YvmzYbjmNMCyrE_RWD2NSS7IUwmKdaiZ2YRsNJ8be=w1232")
+    }
+    &-4 {
+      background: url("https://res.cloudinary.com/tuan-cloudinary/image/upload/v1608136122/saleOff/kara_u21ou3.jpg");
+    }
+  }
+  .header {
+    height: 64px;
+    &-item {
+        & > * {
+          color: grey;
+        }
+        &.active {
+          background-color: transparent;
+          & > * {
+            color: #f1f1f1;
+          }
+        }
+      }
+  }
+  .Related-Products {
+    background-color: transparent;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .Discount-List {
+    .header {
+      display: none;
+    }
+    .countdown {
+      display: none;
+    }
+  }
+}

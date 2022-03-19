@@ -1,0 +1,27 @@
+.Home {
+  .adv {
+    overflow: hidden;
+    &-img {
+      max-width: 60%;
+      max-height: 150px;
+      &:hover,
+      &:active {
+        transform: scale(1.05);
+      }
+      transition: all ease 0.65s;
+    }
+  }
+  .hot-products {
+    h2 {
+      color: #f1f1f1;
+    }
+    .underline-title::after {
+      background-color: #f1f1f1;
+    }
+    & > div {
+      background-image: url('https://lh3.googleusercontent.com/xqE2QIKkxjwRgj7cOkr_MDlpUkXSpPyHF5jGL6pxOhzMZIKT8BPEAsR5soRar3psa-VOGshaXcbguIeKSzQ=w1232');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  }
+}

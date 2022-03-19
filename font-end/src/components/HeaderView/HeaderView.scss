@@ -1,0 +1,46 @@
+.search-bar-wrapper {
+  max-width: 50%;
+}
+
+.search-bar {
+  & input {
+    outline: none;
+    &:focus {
+      border-color: transparent;
+    }
+  }
+}
+
+.category-modal .ant-modal-content {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.navbar-tool-item {
+  padding-left: 32px;
+  transition: all 0.3s;
+
+  .icon {
+    color: #999;
+    font-size: 28px;
+  }
+
+  .title {
+    color: #999;
+    font-weight: 500;
+  }
+
+  &:hover,
+  &:active {
+    .icon,
+    .title {
+      color: #3a5dd9;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header-category{
+    display: none;
+  }
+}
