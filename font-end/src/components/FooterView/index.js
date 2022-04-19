@@ -12,7 +12,7 @@ import {
 import logo from "assets/imgs/Logo2.png";
 import "./FooterWiew.scss";
 
-function FooterView() {
+export default function FooterView() {
   return (
     <div className="footer">
       <div className="d-flex flex-wrap container justify-content-between footer-middle">
@@ -73,19 +73,19 @@ function FooterView() {
           <i className="fa-solid fa-caret-down"></i>
           <ul>
             <li>
-              <a href=".">Celebrations</a>
+              <a href="http://localhost:3000/">Celebrations</a>
             </li>
             <li>
-              <a href=".">Events</a>
+              <a href="http://localhost:3000/">Events</a>
             </li>
             <li>
-              <a href=".">Home Decor</a>
+              <a href="http://localhost:3000/">Home Decor</a>
             </li>
             <li>
-              <a href=".">Seasonal Bouquet</a>
+              <a href="http://localhost:3000/">Seasonal Bouquet</a>
             </li>
             <li>
-              <a href=".">Wedding Decor</a>
+              <a href="http://localhost:3000/">Wedding Decor</a>
             </li>
           </ul>
         </div>
@@ -94,19 +94,19 @@ function FooterView() {
           <i className="fa-solid fa-caret-down"></i>
           <ul>
             <li>
-              <a href=".">Contact us</a>
+              <a href="http://localhost:3000/">Contact us</a>
             </li>
             <li>
-              <a href=".">Privacy Policy</a>
+              <a href="http://localhost:3000/">Privacy Policy</a>
             </li>
             <li>
-              <a href=".">Shipping & Delivery</a>
+              <a href="http://localhost:3000/">Shipping &amp; Delivery</a>
             </li>
             <li>
-              <a href=".">Terms & Conditions</a>
+              <a href="http://localhost:3000/">Terms &amp; Conditions</a>
             </li>
             <li>
-              <a href=".">Returns & Exchanges</a>
+              <a href="http://localhost:3000/">Returns &amp; Exchanges</a>
             </li>
           </ul>
         </div>
@@ -176,16 +176,16 @@ function FooterView() {
           <p>Copyright © 2021 TTB Store.</p>
           <ul className="d-flex footer-menu">
             <li>
-              <a href=".">Shop</a>
+              <a href="http://localhost:3000/">Shop</a>
             </li>
             <li>
-              <a href=".">About Us</a>
+              <a href="http://localhost:3000/">About Us</a>
             </li>
             <li>
-              <a href=".">Contact US</a>
+              <a href="http://localhost:3000/">Contact US</a>
             </li>
             <li>
-              <a href=".">Blog</a>
+              <a href="http://localhost:3000/">Blog</a>
             </li>
           </ul>
         </div>
@@ -193,5 +193,3 @@ function FooterView() {
     </div>
   );
 }
-
-export default FooterView;
