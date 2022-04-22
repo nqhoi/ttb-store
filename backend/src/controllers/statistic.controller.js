@@ -169,9 +169,11 @@ const getTopProductOrder = async (req, res, next) => {
 // api: thống kê danh thu từng sản phẩm
 const getProductListRevenue = async (req, res, next) => {
   try {
-    const { code } = req.query;
 
     const list = await OrderModel.aggregate([
+      {
+        $match: { orderStatus: 6}
+      },
       {
         $group: {
           _id: "$orderProd.id",
@@ -183,8 +185,6 @@ const getProductListRevenue = async (req, res, next) => {
     if (list) {
       let result = [];
       for (let i = 0; i < list.length; ++i) {
-        // if (code == list[i]._id) {
-          // const product = await ProductModel.findById(list[i]._id).select("-otherInfo");
           const product = await ProductModel.findOne({
             _id: list[i]._id,
           }).select("-otherInfo");

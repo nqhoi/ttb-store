@@ -118,7 +118,7 @@ function SignUp() {
       .max(20, "* Mật khẩu tối đa 20 ký tự")
       .matches(
         /^(?=.*[A-Z])(?=.*[~!@#%\^&\*()_\+-=\|\\,\.\/\[\]{}'"`])(?=.*[0-9])(?=.*[a-z]).{6,}$/,
-        "Mật khẩu chứa chữ Hoa,chữ thường, số và ký tự đặc biệt"
+        "Mật khẩu chứa chữ Hoa,chữ thường, số"
       ),
     confirmPassword: Yup.string().oneOf(
       [Yup.ref("password"), null],

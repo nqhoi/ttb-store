@@ -8,6 +8,7 @@ import {
   ReconciliationOutlined,
   ShoppingCartOutlined,
   UserOutlined,
+  CaretRightOutlined,
 } from "@ant-design/icons";
 import { Button, Menu } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
@@ -33,9 +34,9 @@ const menuList = [
     title: "Dashboard",
     icon: <DashboardOutlined />,
     children: [
-      { key: "d0", title: "Revenue", icon: <EyeOutlined /> },
-      { key: "d1", title: "Orders", icon: <PlusCircleOutlined /> },
-      { key: "d2", title: "Product", icon: <PlusCircleOutlined /> },
+      { key: "d0", title: "Revenue", icon: <CaretRightOutlined /> },
+      { key: "d1", title: "Orders", icon: <CaretRightOutlined /> },
+      { key: "d2", title: "Product", icon: <CaretRightOutlined /> },
     ],
   },
   {

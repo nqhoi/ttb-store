@@ -89,12 +89,13 @@ function OrderList() {
         >
           <b>{orderCode}</b>
         </Button>
-      ),  
+      ),
     },
     {
       title: "Ngày đặt",
       key: "orderDate",
       dataIndex: "orderDate",
+      defaultSortOrder: "descend",
       sorter: (a, b) => {
         if (a.orderDate > b.orderDate) return 1;
         if (a.orderDate < b.orderDate) return -1;

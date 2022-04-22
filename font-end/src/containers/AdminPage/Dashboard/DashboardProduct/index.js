@@ -66,7 +66,6 @@ function DashboardProduct() {
       title: "Giá",
       key: "price",
       dataIndex: "price",
-      defaultSortOrder: "descend",
       sorter: (a, b) => a.price - b.price,
       render: (price) => (
         <h3 style={{ color: "#4F55C5" }}>
@@ -86,14 +85,12 @@ function DashboardProduct() {
       title: "Tồn kho",
       key: "stock",
       dataIndex: "stock",
-      // defaultSortOrder: "ascend",
       sorter: (a, b) => a.stock - b.stock,
     },
     {
       title: "Mức giảm giá",
       key: "discount",
       dataIndex: "discount",
-      // defaultSortOrder: "ascend",
       sorter: (a, b) => a.discount - b.discount,
       render: (discount) => `${discount} %`,
     },
@@ -107,14 +104,13 @@ function DashboardProduct() {
       title: "Đã bán",
       key: "count",
       dataIndex: "count",
-      // defaultSortOrder: "ascend",
       sorter: (a, b) => a.count - b.count,
     },
     {
       title: "Danh thu",
       key: "totalPrice",
       dataIndex: "totalPrice",
-      // defaultSortOrder: "ascend",
+      defaultSortOrder: "descend",
       sorter: (a, b) => a.totalPrice - b.totalPrice,
       render: (totalPrice) => (
         <h3 style={{ color: "#4F55C5" }}>
