@@ -135,7 +135,7 @@ const addProduct = async (req, res, next) => {
   try {
     const { product, details, desc } = req.body;
 
-    const { type, avatar, code, ...productRest } = product;
+    const { category, type, avatar, code, ...productRest } = product;
     const { warranty, catalogs, ...detailRest } = details;
     // kiểm tra sản phẩm đã tồn tại hay chưa
     const isExist = await ProductModel.exists({ code });
@@ -155,6 +155,7 @@ const addProduct = async (req, res, next) => {
 
     //Tạo sản phẩm mới
     const newProduct = await ProductModel.create({
+      category,
       type,
       code,
       avt: avtUrl,
@@ -236,12 +237,13 @@ const updateProduct = async (req, res, next) => {
       { _id: product._id },
       { ...rest }
     );
-    if (result && result.ok === 1) {
+    if (result) {
       return res.status(200).json({ message: "success" });
     }
   } catch (error) {
     console.error(error);
-    return res.status(409).json({ message: "failed" });
+    return res.status(409).json({ message: 'Cập nhật thất bại' });
+
   }
 };
 

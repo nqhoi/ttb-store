@@ -123,7 +123,7 @@ function Disk() {
             size="large"
             min={0}
             max={100000}
-            placeholder="RPM (* HDD)"
+            placeholder="RPM (HDD) *"
           />
         </Form.Item>
       </Col>

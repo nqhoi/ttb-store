@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ExclamationCircleOutlined,
   InfoCircleOutlined,
@@ -40,6 +40,7 @@ import Camera from "./Camera";
 import Webcam from "./Webcam";
 import Router from "./Router";
 import Cpu from "./Cpu";
+import categoryApi from "apis/categoryApi";
 const suffixColor = "#aaa";
 
 function AddProduct() {
@@ -47,6 +48,7 @@ function AddProduct() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isTypeSelected, setIsTypeSelected] = useState(false);
   const [typeSelected, setTypeSelected] = useState(-1);
+  const [category, setCategory] = useState([])
   const productDecs = useRef(null);
   // avt file chưa nén
   const [avtFileList, setAvtFileList] = useState([]);
@@ -56,6 +58,22 @@ function AddProduct() {
   const [fileList, setFileList] = useState([]);
   // danh sách hình ảnh sp đã nén
   const fileCompressedList = useRef([]);
+
+  // Xử lý lấy danh sách danh mục
+  useEffect(() => {
+    let isSubscribe = true;
+    const getCategories = async () => {
+      try {
+        const response = await categoryApi.getCategories()
+        if(response && isSubscribe) {
+          setCategory(response.data.data)
+        }
+      } catch (error) {}
+    }
+
+    getCategories()
+    return () => (isSubscribe = false);
+  }, [])
 
   // fn: xử lý khi chọn loại sản phẩm
   const onProductTypeChange = (value) => {
@@ -183,12 +201,13 @@ function AddProduct() {
   const onSubmit = async (data) => {
     try {
       setIsSubmitting(true);
-      const { code, name, price, discount, stock, brand, otherInfo, ...rest } =
+      const { category, code, name, price, discount, stock, brand, otherInfo, ...rest } =
         data;
       // các thuộc tính chung của sản phẩm
       const product = {
         type: typeSelected,
         discount,
+        category,
         code,
         name,
         price,
@@ -254,6 +273,19 @@ function AddProduct() {
               {/* // Note: tổng quan một sản phẩm */}
               <Col span={24}>
                 <h2>Thông tin cơ bản sản phẩm</h2>
+              </Col>
+              <Col span={12} md={8} xl={6} xxl={4}>
+                <Form.Item
+                  name="category"
+                >
+                  <Select allowClear size="large" placeholder="Danh mục *">
+                    {category.map((item, index) => (
+                      <Select.Option value={item.name} key={index}>
+                        {item.name}
+                      </Select.Option>
+                    ))}
+                  </Select>
+                </Form.Item>
               </Col>
               {/* mã sản phẩm */}
               <Col span={12} md={8} xl={6} xxl={4}>

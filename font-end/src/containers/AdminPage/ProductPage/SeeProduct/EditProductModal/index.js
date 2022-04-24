@@ -21,7 +21,7 @@ function EditProductModal(props) {
   const initValues = { _id, code, name, brand, discount, price, stock, type };
   const [isUpdating, setIsUpdating] = useState(false);
 
-  // event: Sửa chữa sản phẩm
+  // event: Cập nhập sản phẩm
   const onEdit = async (value) => {
     try {
       setIsUpdating(true);

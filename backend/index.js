@@ -18,6 +18,7 @@ const accountApi = require("./src/routes/account.api");
 const adminApi = require("./src/routes/admin.api");
 const addressApi = require("./src/routes/address.api");
 const loginApi = require("./src/routes/login.api");
+const categoryApi = require("./src/routes/category.api");
 const productApi = require("./src/routes/product.api");
 const commentApi = require("./src/routes/comment.api");
 const userApi = require("./src/routes/user.api");
@@ -85,6 +86,9 @@ app.use("/apis/user", userApi);
 
 // api liên quan đến login
 app.use("/apis/login", loginApi);
+
+// api liên quan dến category
+app.use("/apis/category", categoryApi);
 
 // api liên quan đến product
 app.use("/apis/products", productApi);

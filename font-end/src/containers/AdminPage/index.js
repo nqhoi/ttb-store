@@ -9,6 +9,7 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
   CaretRightOutlined,
+  MenuOutlined
 } from "@ant-design/icons";
 import { Button, Menu } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
@@ -19,6 +20,7 @@ import React, { useState } from "react";
 import defaultAvt from "../../assets/imgs/default-avt.png";
 import "./AdminPage.scss";
 import AdminUser from "./AdminUser";
+import Category from "./Category";
 import CustomersList from "./CustomersList";
 import DashboardOrders from "./Dashboard/DashboardOrders";
 import DashboardProduct from "./Dashboard/DashboardProduct";
@@ -40,6 +42,12 @@ const menuList = [
     ],
   },
   {
+    key: "ca",
+    title: "Category",
+    icon: <MenuOutlined />,
+    children: [],
+  },
+  {
     key: "p",
     title: "Products",
     icon: <ShoppingCartOutlined />,
@@ -49,7 +57,7 @@ const menuList = [
     ],
   },
   {
-    key: "c",
+    key: "cu",
     title: "Customers",
     icon: <UserOutlined />,
     children: [],
@@ -136,13 +144,15 @@ function AdminPage() {
         return <DashboardOrders />;
       case "d2":
         return <DashboardProduct />;
+      case "ca":
+        return <Category />;
       case "p0":
         return <SeeProduct />;
       case "p1":
         return <AddProduct />;
       case "a":
         return <AdminUser />;
-      case "c":
+      case "cu":
         return <CustomersList />;
       case "o":
         return <OrderList />;

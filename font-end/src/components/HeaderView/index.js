@@ -147,7 +147,7 @@ function HeaderView() {
           />
         </Link>
 
-        {/* category */}
+        {/*  Danh mục */}
         <div className="header-category">
           <Button className="bor-rad-4" onClick={() => setVisible(true)}>
             Danh mục sản phẩm
