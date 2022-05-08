@@ -167,17 +167,18 @@ function ProductOverview(props) {
         {/* Chọn số lượng */}
         <div className="p-t-12 option">
           {currentStock === 0 ? (
-            <h3 className="m-r-8 m-t-8 font-size-18px" style={{ color: "red" }}>
-              <b>Sản phẩm hiện đang hết hàng !</b>
+            <h3 className="m-r-8 m-t-8 font-size-18px" style={{ color: 'red' }}>
+              <i>Sản phẩm hiện đang hết hàng !</i>
             </h3>
           ) : (
             <>
-              <h3 className="m-r-3 m-t-8 font-size-16px">Chọn số lượng: </h3>
+              <h3 className="m-r-8 m-t-8 font-size-16px">Chọn số lượng: </h3>
               <InputNumber
                 name="numOfProduct"
                 size="middle"
                 value={numOfProduct}
                 min={1}
+                max={currentStock}
                 onChange={(value) => setNumberOfProduct(value)}
               />
             </>
