@@ -22,6 +22,8 @@ const AdminModel = require("../models/account.models/admin.model");
 const UserModel = require("../models/account.models/user.model");
 const AccountModel = require("../models/account.models/account.model");
 const OrderModel = require("../models/order.model");
+const OrderModel2 = require("../models/order2.model");
+const OrderDetailsModel = require("../models/orderDetails.model")
 const CpuModel = require("../models/product.models/computer.models/cpu.model");
 
 // fn: upload product avatar to cloudinary
@@ -315,11 +317,56 @@ const getOrderList = async (req, res, next) => {
   }
 };
 
+// api: lấy danh sách đơn hàng
+const getOrderList2 = async (req, res, next) => {
+  try {
+    const list = await OrderModel2.find({}).select("-note");
+    if(list) {
+      const orderDetails = await OrderDetailsModel.find().select("-_id");
+
+      let convertedArr = {};
+      orderDetails.map((each) => {
+        if (convertedArr[each.orderId]) {
+          convertedArr[each.orderId] = [...convertedArr[each.orderId], each];
+          return;
+        }
+      convertedArr[each.orderId] = [each];
+      });
+
+      const result = list.map((each) => {
+        return { ...each, details: convertedArr[`${each._id}`] };
+      });
+
+      const sd = result.map((each) => {
+        return { ...each._doc, orderDetails: each.details };
+      });
+      return res.status(200).json({ list: sd });
+
+    }
+
+    return res.status(200).json({list: listArr });
+  } catch (error) {
+    console.error(error);
+    return res.status(401).json({});
+  }
+};
+
 // api: cập nhật trạng thái đơn hàng
 const postUpdateOrderStatus = async (req, res, next) => {
   try {
     const { id, orderStatus } = req.body;
     const response = await OrderModel.updateOne({ _id: id }, { orderStatus });
+    if (response) return res.status(200).json({});
+  } catch (error) {
+    return res.status(401).json({});
+  }
+};
+
+// api: cập nhật trạng thái đơn hàng
+const postUpdateOrderStatus2 = async (req, res, next) => {
+  try {
+    const { id, orderStatus } = req.body;
+    const response = await OrderModel2.updateOne({ _id: id }, { orderStatus });
     if (response) return res.status(200).json({});
   } catch (error) {
     return res.status(401).json({});
@@ -336,5 +383,7 @@ module.exports = {
   getCustomerList,
   delCustomer,
   getOrderList,
+  getOrderList2,
   postUpdateOrderStatus,
+  postUpdateOrderStatus2,
 };

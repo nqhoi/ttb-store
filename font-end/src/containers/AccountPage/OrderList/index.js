@@ -45,6 +45,7 @@ function OrderList() {
       dataIndex: "orderDate",
       key: "orderDate",
       render: (orderDate) => helpers.formatOrderDate(orderDate),
+      defaultSortOrder: "descend",
       sorter: (a, b) => {
         if (a.orderDate < b.orderDate) return -1;
         if (a.orderDate > b.orderDate) return 1;
@@ -55,12 +56,18 @@ function OrderList() {
       title: "Tổng tiền",
       dataIndex: "totalMoney",
       key: "totalMoney",
+      // render: (value, records) => {
+      //   const total = helpers.calTotalOrderFee(records);
+      //   return helpers.formatProductPrice(total);
+      // },
+      // sorter: (a, b) =>
+      //   helpers.calTotalOrderFee(a) - helpers.calTotalOrderFee(b),
       render: (value, records) => {
-        const total = helpers.calTotalOrderFee(records);
+        const total = helpers.calTotalOrderFee2(records);
         return helpers.formatProductPrice(total);
       },
       sorter: (a, b) =>
-        helpers.calTotalOrderFee(a) - helpers.calTotalOrderFee(b),
+        helpers.calTotalOrderFee2(a) - helpers.calTotalOrderFee2(b),
     },
     {
       title: "Trạng thái đơn hàng",
@@ -97,7 +104,7 @@ function OrderList() {
     const getOrderList = async () => {
       try {
         setIsLoading(true);
-        const response = await orderApi.getOrderList(user._id);
+        const response = await orderApi.getOrderList2(user._id);
         if (response && isSubscribe) {
           const { list } = response.data;
           setOrderList(

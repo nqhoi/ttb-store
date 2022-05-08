@@ -10,12 +10,12 @@ function TopProductOrders() {
   const [isLoading, setIsLoading] = useState(true);
   const [list, setList] = useState({ name: [], count: [] });
 
-  // event: thống kê sản phẩm có nhiều đơn đặt hàng 
+  // event: thống kê sản phẩm có nhiều đơn đặt hàng
   useEffect(() => {
     let isSubscribe = true;
     const getTopProvinceOrder = async () => {
       try {
-        const response = await statisticApi.getTopProductOrder();
+        const response = await statisticApi.getTopProductOrder2();
         if (response && isSubscribe) {
           const { data } = response.data;
           setList({

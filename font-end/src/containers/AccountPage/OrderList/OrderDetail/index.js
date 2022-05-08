@@ -17,7 +17,7 @@ function OrderDetail(props) {
     let isSubscribe = true;
     const getOrderDetails = async () => {
       try {
-        const response = await orderApi.getOrderDetails(orderId);
+        const response = await orderApi.getOrderDetails3(orderId);
         if (response && isSubscribe) {
           setOrder(response.data.order);
           setIsLoading(false);
@@ -41,39 +41,77 @@ function OrderDetail(props) {
       dataIndex: "prod",
       key: "prod",
       render: (v, record) => (
-        <Link to={`/product/${record.orderProd.id}`}>
-          <Tooltip title={record.orderProd.name}>
-            {helpers.reduceProductName(record.orderProd.name, 40)}
-          </Tooltip>
-        </Link>
+        record.orderDetails.map((item, index) => (
+          <div className="m-b-12"  key={index}>
+            <Link to={`/product/${item.orderProd.id}`} >
+              <Tooltip title={item.orderProd.name}>
+                {helpers.reduceProductName(item.orderProd.name, 40)}
+              </Tooltip>
+            </Link>
+          </div>
+          // <Link to={`/product/${record.orderProd.id}`}>
+          //   <Tooltip title={record.orderProd.name}>
+          //     {helpers.reduceProductName(record.orderProd.name, 40)}
+          //   </Tooltip>
+          // </Link>
+        ))
       ),
     },
     {
       title: "Giá",
       dataIndex: "price",
       key: "prod",
-      render: (v, record) => helpers.formatProductPrice(record.orderProd.price),
+      render: (v, record) => (
+        record.orderDetails.map((item, index) => (
+          <div className="m-b-12" key={index}>
+            {helpers.formatProductPrice(item.orderProd.price)}
+          </div>
+        ))
+        // {helpers.formatProductPrice(item.orderProd.price)}
+      )
     },
     {
       title: "Số lượng",
       dataIndex: "numOfProd",
       key: "numOfProd",
+      render: (v, record) => (
+        record.orderDetails.map((item, index) => (
+         <div className="m-b-12" key={index}>
+            {item.numOfProd}
+         </div>
+        ))
+      ),
     },
     {
       title: "Giảm giá",
       dataIndex: "discount",
       key: "prod",
-      render: (v, record) => `${record.orderProd.discount} %`,
+      render: (v, record) => (
+        record.orderDetails.map((item, index) => (
+         <div className="m-b-12" key={index}>
+            {`${item.orderProd.discount} %`}
+         </div>
+        ))
+        //{`${item.orderProd.discount} %`}
+      ),
     },
     {
       title: "Tạm tính",
       dataIndex: "totalMoney",
       key: "totalMoney",
       render: (v, record) => {
-        const { price, discount } = record.orderProd;
-        return helpers.formatProductPrice(
-          price * record.numOfProd - (price * record.numOfProd * discount) / 100
-        );
+        return record.orderDetails.map((item, index) => {
+          const { price, discount } = item.orderProd;
+          return (
+            <div className="m-b-12" key={index}>
+              {helpers.formatProductPrice(price * item.numOfProd - (price * item.numOfProd * discount) / 100)}
+            </div>
+          )
+        })
+        // const { price, discount } = record.orderDetails.orderProd;
+        // return helpers.formatProductPrice(
+        //   price * record.numOfProd - (price * record.numOfProd * discount) / 100
+        // );
       },
     },
   ];
@@ -170,11 +208,18 @@ function OrderDetail(props) {
                   style={{ color: "#888", minWidth: 180 }}
                 >
                   {helpers.formatProductPrice(
-                    order.orderProd.price * order.numOfProd -
-                      (order.orderProd.price *
-                        order.numOfProd *
-                        order.orderProd.discount) /
-                        100
+                    order.orderDetails.reduce((total, item) => {
+                      return  total +=
+                        item.orderProd.price * item.numOfProd -
+                        (item.orderProd.price * item.numOfProd *item.orderProd.discount) /100
+                    }, 0)
+                    // order.orderDetails.reduce((item, idx) => (
+                    //   item.orderProd.price * item.numOfProd -
+                    //     (item.orderProd.price *
+                    //       item.numOfProd *
+                    //       item.orderProd.discount) /
+                    //       100
+                    // ))
                   )}
                 </span>
               </div>
@@ -193,7 +238,7 @@ function OrderDetail(props) {
                   className="m-l-32 font-size-18px"
                   style={{ color: "#ff2000", minWidth: 180 }}
                 >
-                  {helpers.formatProductPrice(helpers.calTotalOrderFee(order))}
+                  {helpers.formatProductPrice(helpers.calTotalOrderFee2(order))}
                 </span>
               </div>
             </Col>

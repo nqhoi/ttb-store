@@ -1034,6 +1034,17 @@ const calTotalOrderFee = (order) => {
   return total;
 };
 
+// fn: tính tổng phí đơn hàng
+const calTotalOrderFee2 = (order) => {
+  const { transportFee, orderDetails} = order;
+  const total = orderDetails.reduce((total, item) => {
+    return total +=
+    item.orderProd.price * item.numOfProd -
+    (item.orderProd.price * item.numOfProd *item.orderProd.discount) /100
+  }, 0)
+  return total + transportFee;
+};
+
 export default {
   replaceMongoKeyword,
   formatQueryString,
@@ -1055,4 +1066,5 @@ export default {
   convertOrderStatus,
   convertPaymentMethod,
   calTotalOrderFee,
+  calTotalOrderFee2
 };

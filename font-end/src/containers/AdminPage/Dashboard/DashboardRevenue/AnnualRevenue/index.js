@@ -28,7 +28,7 @@ function AnnualRevenue() {
     let isSubscribe = true;
     async function getStaAnnualRevenue() {
       try {
-        const response = await statisticApi.getStaAnnualRevenue(
+        const response = await statisticApi.getStaAnnualRevenue2(
           startYear,
           endYear
         );

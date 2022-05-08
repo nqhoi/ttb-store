@@ -58,10 +58,20 @@ const adminApi = {
     const url = ADMIN_API_ENDPOINT + '/order';
     return axiosClient.get(url);
   },
+   // fn: Lấy danh sách đơn hàng
+   getOrderList2: () => {
+    const url = ADMIN_API_ENDPOINT + '/order2';
+    return axiosClient.get(url);
+  },
 
   // fn: cập nhật trạng thái đơn hàng
   postUpdateOrderStatus: (id, orderStatus) => {
     const url = ADMIN_API_ENDPOINT + '/order';
+    return axiosClient.post(url, { id, orderStatus });
+  },
+  // fn: cập nhật trạng thái đơn hàng
+  postUpdateOrderStatus2: (id, orderStatus) => {
+    const url = ADMIN_API_ENDPOINT + '/order2';
     return axiosClient.post(url, { id, orderStatus });
   },
 };

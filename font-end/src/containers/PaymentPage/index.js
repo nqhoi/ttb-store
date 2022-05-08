@@ -121,7 +121,7 @@ function PaymentPage() {
           orderProd: {code, name, price, discount, id: _id },
         };
       });
-      const response = await orderApi.postCreateOrder({
+      const response = await orderApi.postCreateOrder2({
         owner,
         deliveryAdd,
         paymentMethod,
@@ -249,14 +249,14 @@ function PaymentPage() {
                     </Col>
                     <Col
                       span={24} md={12}
-                      // onClick={() =>
-                      //   message.warn(
-                      //     "Tính năng đang được cập nhật. Rất xin lỗi quý khách vì sự bất tiện này",
-                      //     3
-                      //   )
-                      // }
-          
-                      onClick={vnpayCheckout}
+                      onClick={() =>
+                        message.warn(
+                          "Tính năng đang được cập nhật. Rất xin lỗi quý khách vì sự bất tiện này",
+                          3
+                        )
+                      }
+
+                      // onClick={vnpayCheckout}
                     >
                       <div className="bg-gray p-tb-8 p-lr-16">
                         <b className="font-size-16px">

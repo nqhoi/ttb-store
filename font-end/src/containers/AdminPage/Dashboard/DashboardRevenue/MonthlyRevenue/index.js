@@ -26,7 +26,8 @@ function MonthlyRevenue() {
     const getStaMonthlyRevenue = async (year) => {
       try {
         setIsLoading(true);
-        const response = await statisticApi.getStaMonthlyRevenue(year);
+        // const response = await statisticApi.getStaMonthlyRevenue(year);
+        const response = await statisticApi.getStaMonthlyRevenue2(year);
         if (isSubScribe && response) {
           const { thisYear, lastYear } = response.data;
           setData({ thisYear, lastYear });

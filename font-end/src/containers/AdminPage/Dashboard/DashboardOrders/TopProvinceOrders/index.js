@@ -14,7 +14,7 @@ function TopProvinceOrders() {
     let isSubscribe = true;
     const getTopProvinceOrder = async () => {
       try {
-        const response = await statisticApi.getTopProvinceOrder();
+        const response = await statisticApi.getTopProvinceOrder2();
         if (response && isSubscribe) {
           const { data } = response.data;
           setList({

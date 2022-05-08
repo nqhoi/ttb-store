@@ -18,7 +18,7 @@ function ProductTopSell(props) {
     let isSubscribe = true;
     const getRelatedProducts = async () => {
       try {
-        const response = await statisticApi.getTopProductOrder();
+        const response = await statisticApi.getTopProductOrder2();
         if (response && isSubscribe) {
           setProductList(response.data.data);
         }

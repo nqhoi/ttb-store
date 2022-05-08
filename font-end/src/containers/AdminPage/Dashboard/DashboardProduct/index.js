@@ -21,7 +21,7 @@ function DashboardProduct() {
     setIsLoading(true);
     async function getProductList() {
       try {
-        const response = await statisticApi.getProductListRevenue(-1);
+        const response = await statisticApi.getProductListRevenue2(-1);
         if (response && isSubscribe) {
           const { data } = response.data;
           const list = data.map((item, index) => {
