@@ -24,7 +24,7 @@ function LoginGoogle(props) {
         localStorage.setItem(constants.ACCESS_TOKEN_KEY, data.token);
       dispatch(authReducers.setIsAuth(true));
       setTimeout(() => {
-        history.goBack();
+        history.push("/");
       }, constants.DELAY_TIME);
     } catch (error) {
       message.error("Lỗi đăng nhập.");

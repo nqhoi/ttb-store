@@ -96,37 +96,40 @@ function HeaderView() {
   // Menu for user action
   const userActionMenu = (
     <Menu className="m-t-24" style={{ width: 244 }}>
-      <Menu.Item>
         {isAuth ? (
-          <Button
-            onClick={onLogout}
-            size="large"
-            className="w-100"
-            type="primary"
-            danger={isAuth}
-          >
-            Đăng xuất
-          </Button>
+          <>
+          <Menu.Item>
+            <Button
+              onClick={onLogout}
+              size="large"
+              className="w-100"
+              type="primary"
+              danger={isAuth}>
+              Đăng xuất
+            </Button>
+          </Menu.Item>
+          <Menu.Item>
+            <Button size="large" className="w-100 btn-secondary" type="default">
+              <Link to={constants.ROUTES.ACCOUNT + "/"}>Quản lý Tài khoản</Link>
+            </Button>
+          </Menu.Item>
+        </>
         ) : (
-          <Button size="large" className="w-100" type="primary">
-            <Link to={constants.ROUTES.LOGIN}>Đăng nhập</Link>
-          </Button>
+          <>
+            <Menu.Item>
+              <Button size="large" className="w-100" type="primary">
+                <Link to={constants.ROUTES.LOGIN}>Đăng nhập</Link>
+              </Button>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to={constants.ROUTES.SIGNUP}>
+                <Button size="large" className="w-100 btn-secondary" type="default">
+                  Đăng ký
+                </Button>
+              </Link>
+            </Menu.Item>
+          </>
         )}
-      </Menu.Item>
-      <Menu.Item>
-        <Link to={constants.ROUTES.SIGNUP}>
-          <Button size="large" className="w-100 btn-secondary" type="default">
-            Đăng ký
-          </Button>
-        </Link>
-      </Menu.Item>
-      {isAuth && (
-        <Menu.Item>
-          <Button size="large" className="w-100 btn-secondary" type="default">
-            <Link to={constants.ROUTES.ACCOUNT + "/"}>Quản lý Tài khoản</Link>
-          </Button>
-        </Menu.Item>
-      )}
     </Menu>
   );
 

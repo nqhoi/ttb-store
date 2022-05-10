@@ -1,23 +1,18 @@
-import { Button, Col, message, Row, Tooltip } from "antd";
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
-  InfoCircleOutlined,
+  InfoCircleOutlined
 } from "@ant-design/icons";
+import { Button, Col, message, Row, Tooltip } from "antd";
 import accountApi from "apis/accountApi";
-import React from "react";
-import { useRef } from "react";
-import { useState } from "react";
-import constants from "constants/index";
-import * as Yup from "yup";
-import Delay from "components/Delay";
-import { Redirect } from "react-router";
-import { FastField, Form, Formik } from "formik";
 import InputField from "components/Custom/InputField";
-import { Link } from "react-router-dom";
+import Delay from "components/Delay";
+import constants from "constants/index";
+import { FastField, Form, Formik } from "formik";
+import React, { useRef, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import * as Yup from "yup";
 import "./ForgotPassword.scss";
-
-const suffixColor = "rgba(0, 0, 0, 0.25)";
 
 function ForgotPassword() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,7 +20,7 @@ function ForgotPassword() {
   const [isSending, setIsSending] = useState(false);
   const emailRef = useRef("");
 
-  // : gửi mã xác nhận
+  // fn: gửi mã xác nhận
   const onSendCode = async () => {
     try {
       // kiểm tra email
@@ -42,7 +37,7 @@ function ForgotPassword() {
       // tiến hành gửi mã
       const result = await accountApi.postSendCodeForgotPW({ email });
       if (result.status === 200) {
-        message.success("Gủi thành công, kiểm tra email");
+        message.success("Gửi thành công, kiểm tra email");
         setIsSending(false);
       }
     } catch (error) {
@@ -55,11 +50,11 @@ function ForgotPassword() {
     }
   };
 
-  // : thay đổi mật khẩu
+  // fn: thay đổi mật khẩu
   const onChangePassword = async (account) => {
     try {
       setIsSubmitting(true);
-      const result = await accountApi.postResetPassword(account);
+      const result = await accountApi.postResetPassword({ account });
       if (result.status === 200) {
         setIsSubmitting(false);
         setIsSuccess(true);
@@ -88,7 +83,15 @@ function ForgotPassword() {
       .trim()
       .required("* Email bạn là gì ?")
       .email("* Email không hợp lệ !"),
-    password: Yup.string().trim().required("* Mật khẩu của bạn là gì ?"),
+    password: Yup.string()
+    .trim()
+    .required("* Mật khẩu của bạn là gì ?")
+    .min(6, "* Mật khẩu ít nhất 6 ký tự")
+    .max(20, "* Mật khẩu tối đa 20 ký tự")
+    .matches(
+      /^(?=.*[A-Z])(?=.*[~!@#%\^&\*()_\+-=\|\\,\.\/\[\]{}'"`])(?=.*[0-9])(?=.*[a-z]).{6,}$/,
+      "Mật khẩu chứa chữ Hoa,chữ thường, số"
+    ),
     verifyCode: Yup.string()
       .trim()
       .required("* Nhập mã xác nhận")
@@ -117,33 +120,37 @@ function ForgotPassword() {
       >
         {(formikProps) => {
           emailRef.current = formikProps.values.email;
+          const suffixColor = "rgba(0, 0, 0, 0.25)";
           return (
             <Form className="bg-form">
               <Row
+                className="input-border p-l-20 p-r-20"
                 gutter={[0, 24]}
                 justify="center"
                 style={{ marginLeft: 0, marginRight: 0 }}
-                className="input-border p-l-20 p-r-20"
+
               >
                 {/* Form thông tin đăng nhập */}
                 <Col span={24} className="m-t-20">
                   <FastField
                     name="email"
                     component={InputField}
+                    className="input-form-common"
                     placeholder="Email *"
                     size="large"
                     suffix={
                       <Tooltip title="Email của bạn ">
-                        <InfoCircleOutlined style={{ color: suffixColor }} />
-                      </Tooltip>
+                      <InfoCircleOutlined style={{ color: suffixColor }} />
+                    </Tooltip>
                     }
                   />
                 </Col>
-                <Col span={24} className="m-t-20">
+                <Col span={24}>
                   <FastField
                     name="password"
                     type="password"
                     component={InputField}
+                    className="input-form-common"
                     placeholder="Mật khẩu mới *"
                     size="large"
                     autocomplete="on"

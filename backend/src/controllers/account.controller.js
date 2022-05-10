@@ -171,7 +171,7 @@ const postResetPassword = async (req, res, next) => {
     );
 
     //check response -> return client
-    if (response.n) {
+    if (response) {
       //xoá mã xác nhận
       await VerifyModel.deleteOne({ email });
       return res.status(200).json({ message: "Thay đổi mật khẩu thành công" });
