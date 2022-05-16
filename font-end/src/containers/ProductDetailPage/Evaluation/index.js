@@ -2,6 +2,7 @@ import commentApi from "apis/commentApi";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import EvaluationView from "components/ProductDetail/EvaluationView";
+import { message } from "antd";
 
 function Evaluation(props) {
   const { productId, rates } = props;
@@ -22,9 +23,39 @@ function Evaluation(props) {
     return () => (isSubscribe = false);
   }, [props]);
 
+  // event: xoá nhận xét
+  const onDelete = async (_id) => {
+    try {
+      const response = await commentApi.deleteComment(_id);
+      if (response && response.status === 200) {
+        message.success("Xoá thành công.");
+        const newList = cmtList.filter((item) => item._id !== _id);
+        setCmtList(newList);
+      }
+    } catch (error) {
+      message.error("Xoá thất bại, thử lại !");
+    }
+  };
+
+  // event: Cập nhập sản phẩm
+  const onEdit = async (id, value) => {
+    try {
+      const response = await commentApi.updateComment(id, value);
+      if (response && response.status === 200) {
+        const newList = cmtList.map((item) =>
+        item._id !== id ? item : { ...item, ...value }
+        );
+        setCmtList(newList);
+        message.success("Cập nhật thành công");
+      }
+    } catch (error) {
+      message.error("Cập nhật thất bại");
+    }
+  };
+
   return (
     <div>
-      <EvaluationView productId={productId} rates={rates} cmtList={cmtList} />
+      <EvaluationView productId={productId} rates={rates} cmtList={cmtList} onDelete={onDelete} onEdit={onEdit} />
     </div>
   );
 }

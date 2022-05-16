@@ -225,6 +225,7 @@ const postCreateOrder2 = async (req, res, next) => {
         const product = await ProductModel.findById(orderProd.id);
         if (product) {
           if (product.stock < parseInt(numOfProd)) {
+            await Order2Model.deleteOne({ _id: newOrder._id });
             return res.status(401).json({ message: "Sản phẩm tồn kho đã hết" });
           } else {
             await ProductModel.updateOne(

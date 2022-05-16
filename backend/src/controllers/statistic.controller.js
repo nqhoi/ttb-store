@@ -370,8 +370,6 @@ const getTopProductOrder2 = async (req, res, next) => {
       },
     ]);
 
-    console.log(topList)
-
     if (topList) {
       let result = [];
       for (let i = 0; i < topList.length; ++i) {

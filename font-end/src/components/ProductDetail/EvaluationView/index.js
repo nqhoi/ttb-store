@@ -15,7 +15,7 @@ EvaluationView.defaultProps = {
 };
 
 function EvaluationView(props) {
-  const { rates, cmtList, productId } = props;
+  const { rates, cmtList, productId, onDelete, onEdit } = props;
   const { isAuth } = useSelector((state) => state.authenticate);
   const user = useSelector((state) => state.user);
   const [cmtListState, setCmtListState] = useState(cmtList);
@@ -115,11 +115,11 @@ function EvaluationView(props) {
       {/* Xem bình luận, nhận xét */}
       <Col span={24}>
         {cmtListSliced.map((item, index) => (
-          <UserComment key={index} comment={item} />
+          <UserComment key={index} comment={item} onDelete={onDelete} onEdit={onEdit} />
         ))}
         {pageTotal > 1 && (
           <Pagination
-            className="t-right m-b-16"
+            className="t-center m-b-16"
             defaultCurrent={1}
             total={pageTotal}
             pageSize={1}
