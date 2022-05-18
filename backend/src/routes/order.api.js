@@ -16,4 +16,7 @@ orderApi.get('/3', orderController.getOrderDetails3);
 orderApi.post('/', orderController.postCreateOrder);
 orderApi.post('/2', orderController.postCreateOrder2);
 
+// api: Hủy đơn hàng
+orderApi.delete('/', orderController.removeOrder)
+
 module.exports = orderApi;

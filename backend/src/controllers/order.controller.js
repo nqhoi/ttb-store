@@ -251,6 +251,34 @@ const postCreateOrder2 = async (req, res, next) => {
   }
 };
 
+// api: Hủy đơn hàng
+const removeOrder =  async (req, res, next) => {
+  try {
+    const { id } = req.query
+    const response = await Order2Model.findById(id);
+    if (response) {
+      // xóa đơn hàng
+      await Order2Model.deleteOne({_id: id})
+      // xóa chi chi tiết đơn hàng
+      const orderDetails = await OrderDetailModel.find({orderId: id})
+      if (orderDetails) {
+        // Cập nhật lại số lượng sản phẩm trong kho
+        for (let i = 0; i < orderDetails.length; i++) {
+          const { orderProd, numOfProd } = orderDetails[i];
+          const product = await ProductModel.findById(orderProd.id)
+          await ProductModel.updateOne(
+            {_id: orderProd.id},
+            {stock: product.stock + parseInt(numOfProd)})
+        }
+        await OrderDetailModel.deleteMany({orderId: id})
+      }
+    }
+    return res.status(200).json({ message: "success" });
+  } catch (error) {
+    return res.status(409).json({ message: "Xoá dơn hàng thất bại" });
+  }
+}
+
 module.exports = {
   getOrderList,
   getOrderList2,
@@ -260,4 +288,5 @@ module.exports = {
   getOrderDetails3,
   postCreateOrder,
   postCreateOrder2,
+  removeOrder
 };

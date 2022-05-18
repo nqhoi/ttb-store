@@ -44,6 +44,12 @@ const orderApi = {
     const url = ORDER_API_ENDPOINT + '/2';
     return axiosClient.post(url, data);
   },
+
+   // api: xóa đơn hàng
+   removeOrder: (id) => {
+    const url = ORDER_API_ENDPOINT + '/';
+    return axiosClient.delete(url, { params: { id } });
+  },
 };
 
 export default orderApi;

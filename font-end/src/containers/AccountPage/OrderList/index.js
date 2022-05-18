@@ -1,4 +1,10 @@
-import { Button, Spin, Table } from "antd";
+import { Button, Spin, Table, Tooltip, message } from "antd";
+import {
+  DeleteOutlined,
+  EyeOutlined,
+  WarningOutlined,
+} from "@ant-design/icons";
+import Modal from "antd/lib/modal/Modal";
 import orderApi from "apis/orderApi";
 import helpers from "helpers";
 import React, { useEffect, useState } from "react";
@@ -18,10 +24,22 @@ function OrderList() {
   const user = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
   const [orderList, setOrderList] = useState([]);
-  const [orderDetails, setOrderDetails] = useState({
-    isOpen: false,
-    orderId: "",
-  });
+  const [modalDel, setModalDel] = useState({ visible: false, _id: "" });
+  const [orderDetails, setOrderDetails] = useState({isOpen: false, orderId: ""});
+
+  // fn: Xử lý xóa đơn hàng
+  const onDelete = async (_id) => {
+    try {
+      const response = await orderApi.removeOrder(_id);
+      if (response && response.status === 200) {
+        message.success("Xoá thành công.");
+        const newList = orderList.filter((item) => item._id !== _id);
+        setOrderList(newList);
+      }
+    } catch (error) {
+      message.error("Xoá thất bại, thử lại !");
+    }
+  };
 
   // các cột cho bảng danh sách đơn hàng
   const orderColumns = [
@@ -77,6 +95,36 @@ function OrderList() {
       onFilter: (value, record) => record.orderStatus === value,
       render: (orderStatus) => helpers.convertOrderStatus(orderStatus),
     },
+    {
+      title: "Hành động",
+      key: "actions",
+      fixed: "right",
+      // width: 150,
+      render: (records) => (
+        <>
+          {/* Chỉ được hủy đơn hàng khi chưa xác nhận */}
+          {records.orderStatus === 0 && (
+            <Tooltip title="Xóa" placement="left">
+              <DeleteOutlined
+                onClick={() => setModalDel({ visible: true, _id: records._id })}
+                className="m-r-8 action-btn-order"
+                style={{ color: "red" }}
+              />
+            </Tooltip>
+          )}
+
+          <Tooltip title="Xem chi tiết" placement="left">
+            <EyeOutlined
+              onClick={() =>
+                setOrderDetails({ isOpen: true, orderId: records._id })
+              }
+              className="action-btn-order"
+              style={{ color: "#444" }}
+            />
+          </Tooltip>
+        </>
+      ),
+    },
   ];
 
   // : hiển thị danh sách đơn hàng
@@ -86,15 +134,34 @@ function OrderList() {
         Hiện tại bạn chưa có đơn hàng nào
       </h3>
     ) : (
-      <Table
-        columns={orderColumns}
-        dataSource={list}
-        pagination={{
-          pageSize: 8,
-          showSizeChanger: false,
-          position: ["bottomRight"],
-        }}
-      />
+      <>
+        {/* modal confirm cancel order */}
+        <Modal
+          title="Xác nhận hủy đơn hàng"
+          visible={modalDel.visible}
+          onOk={() => {
+            onDelete(modalDel._id);
+            setModalDel({ visible: false, _id: false });
+          }}
+          onCancel={() => setModalDel({ visible: false, _id: false })}
+          okButtonProps={{ danger: true }}
+          okText="Xoá"
+          cancelText="Huỷ bỏ"
+        >
+          <WarningOutlined style={{ fontSize: 28, color: "#F7B217" }} />
+          <b> Không thể khôi phục được, bạn có chắc muốn hủy đơn hàng ?</b>
+        </Modal>
+        {/* table show order list */}
+        <Table
+          columns={orderColumns}
+          dataSource={list}
+          pagination={{
+            pageSize: 8,
+            showSizeChanger: false,
+            position: ["bottomRight"],
+          }}
+        />
+      </>
     );
   };
 
