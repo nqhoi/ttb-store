@@ -161,7 +161,7 @@ function PaymentPage() {
             <Result
               status="success"
               title="Đơn hàng của bạn đã đặt thành công."
-              subTitle="Xem chi tiết đơn hàng vừa rồi"
+              subTitle="Xem chi tiết đơn hàng vừa rồi, thông báo xác nhận đợn hàng đã được tởi gmail của Anh/chị"
               extra={[
                 <Button type="default" key="0">
                   <Link to={constants.ROUTES.ACCOUNT + "/orders"}>

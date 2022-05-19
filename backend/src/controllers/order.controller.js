@@ -3,6 +3,9 @@ const Order2Model = require("../models/order2.model");
 const OrderDetailModel = require("../models/orderDetails.model");
 const helpers = require("../helpers");
 const ProductModel = require("../models/product.models/product.model");
+const UserModel = require("../models/account.models/user.model");
+const mailConfig = require("../configs/mail.config");
+const AccountModel = require("../models/account.models/account.model");
 
 // api: lấy danh sách đơn hàng
 const getOrderList = async (req, res, next) => {
@@ -218,7 +221,6 @@ const postCreateOrder2 = async (req, res, next) => {
       note,
     });
 
-    let response = {};
     if (newOrder) {
       for (let i = 0; i < productList.length; ++i) {
         const { orderProd, numOfProd } = productList[i];
@@ -232,7 +234,7 @@ const postCreateOrder2 = async (req, res, next) => {
               { _id: orderProd.id },
               { stock: product.stock - parseInt(numOfProd) }
             );
-            response = await OrderDetailModel.create({
+            await OrderDetailModel.create({
               orderId: newOrder._id,
               orderProd,
               numOfProd,
@@ -244,7 +246,21 @@ const postCreateOrder2 = async (req, res, next) => {
       }
     }
 
-    if (response) return res.status(200).json({});
+    const userInfo = await UserModel.findById({_id: owner})
+    const accountInfo = await AccountModel.findById({_id: userInfo.accountId})
+    const addressStr = await helpers.convertAddress(newOrder.deliveryAdd.address);
+    if(userInfo) {
+      //cấu hình email sẽ gửi
+      const mail = {
+        to: accountInfo.email,
+        subject: `TTB Store - Thông báo xác nhận đơn hàng #${newOrder.orderCode} `,
+        html: mailConfig.htmlOrderSuccess(accountInfo, newOrder, addressStr),
+      };
+
+      await mailConfig.sendEmail(mail);
+    }
+
+    if (newOrder) return res.status(200).json({});
   } catch (error) {
     console.error(error);
     return res.status(401).json({ message: "Lỗi hệ thống" });
