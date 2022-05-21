@@ -15,6 +15,8 @@
     "mongoose": "^6.0.12",
     "morgan": "^1.10.0",
     "nodemailer": "^6.7.0",
+    "nodemailer-sendgrid": "^1.0.3",
+    "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^2.0.14",
     "passport": "^0.5.0",
     "passport-google-token": "^0.1.2",

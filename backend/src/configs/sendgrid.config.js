@@ -1,50 +1,39 @@
-// main.js
+require("dotenv").config();
 const nodemailer = require('nodemailer');
-const smtpTransport = require('nodemailer-smtp-transport');
+const nodemailerSendgrid = require('nodemailer-sendgrid');
 
-// configure option
-const option = {
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.NODE_MAILER_USER,
-    pass: process.env.NODE_MAILER_PASSWORD,
-  },
-  tls: {
-    // do not fail on invalid certs
-    rejectUnauthorized: false,
-  },
-};
-
-const transporter = nodemailer.createTransport(smtpTransport(option));
+const transport = nodemailer.createTransport(
+  nodemailerSendgrid({
+    auth: {
+      api_user: process.env.SENDGRID_SENDER_DEFAULT,
+      api_key: process.env.SENDGRID_API_KEY
+    }
+  })
+);
 
 // send email
 const sendEmail = async ({ to, subject, text, html, ...rest }) => {
   try {
-    const res = await transporter.verify();
-    if (res) {
-      //config mail
-      const mail = {
-        //sender access
-        from: '"TTB Store" <no-reply@accounts.ttb-store.com>',
-        //receiver access
-        to,
-        //subject
-        subject,
-        //content text
-        text,
-        //html
-        html,
-        //others
-        ...rest,
-      };
-      //Tiến hành gửi email
-      const info = await transporter.sendMail(mail);
+    //config mail
+    const mail = {
+      //sender access
+      from: process.env.SENDGRID_SENDER_DEFAULT,
+      //receiver access
+      to,
+      //subject
+      subject,
+      //content text
+      text,
+      //html
+      html,
+      //others
+      ...rest,
+    }
+    //Tiến hành gửi email
+      const info = await transport.sendMail(mail);
       if (info) {
         return true;
-      }
-    }
+      };
   } catch (err) {
     console.error('ERROR MAILER: ', err);
     return false;
