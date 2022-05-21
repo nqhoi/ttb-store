@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import logo from "assets/imgs/Logo2.png";
 import "./FooterWiew.scss";
+import { Link } from "react-router-dom";
 
 export default function FooterView() {
   return (
@@ -21,9 +22,9 @@ export default function FooterView() {
           <i className="fa-solid fa-caret-down"></i>
           <ul className="contact-list">
             <li className="contact-item">
-              <a href="http://localhost:3000/" className="logo">
+              <Link to="/" className="logo">
                 <img src={logo} alt="logo" className="logo-image" />
-              </a>
+              </Link>
             </li>
             <li className="contact-item">
               <GoldOutlined />
@@ -31,7 +32,7 @@ export default function FooterView() {
             </li>
             <li className="contact-item">
               <MailFilled />
-              <a href="mailto:contact@company.com"> contact@company.com</a>
+              <Link to="/"> contact@company.com</Link>
             </li>
             <li className="contact-item">
               <PhoneOutlined />
@@ -40,29 +41,29 @@ export default function FooterView() {
             <li className="contact-item">
               <ul className="contact-list-icon">
                 <li className="contact-icon">
-                  <a href="https://www.facebook.com/">
+                  <Link to="/">
                     <FacebookOutlined />
-                  </a>
+                  </Link>
                 </li>
                 <li className="contact-icon">
-                  <a href="https://www.twitter.com/">
+                  <Link to="/">
                     <TwitterOutlined />
-                  </a>
+                  </Link>
                 </li>
                 <li className="contact-icon">
-                  <a href="https://www.instagram.com/">
+                  <Link to="/">
                     <InstagramOutlined />
-                  </a>
+                  </Link>
                 </li>
                 <li className="contact-icon">
-                  <a href="https://www.youtube.com/">
+                  <Link to="/">
                     <YoutubeOutlined />
-                  </a>
+                  </Link>
                 </li>
                 <li className="contact-icon">
-                  <a href="https://www.message.com/">
+                  <Link to="/">
                     <MessageOutlined />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -73,19 +74,19 @@ export default function FooterView() {
           <i className="fa-solid fa-caret-down"></i>
           <ul>
             <li>
-              <a href="http://localhost:3000/">Celebrations</a>
+              <Link to="/">Celebrations</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">Events</a>
+              <Link to="/">Events</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">Home Decor</a>
+              <Link to="/">Home Decor</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">Seasonal Bouquet</a>
+              <Link to="/">Seasonal Bouquet</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">Wedding Decor</a>
+              <Link to="/">Wedding Decor</Link>
             </li>
           </ul>
         </div>
@@ -94,19 +95,19 @@ export default function FooterView() {
           <i className="fa-solid fa-caret-down"></i>
           <ul>
             <li>
-              <a href="http://localhost:3000/">Contact us</a>
+              <Link to="/">Contact us</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">Privacy Policy</a>
+              <Link to="/">Privacy Policy</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">Shipping &amp; Delivery</a>
+              <Link to="/">Shipping &amp; Delivery</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">Terms &amp; Conditions</a>
+              <Link to="/">Terms &amp; Conditions</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">Returns &amp; Exchanges</a>
+              <Link to="/">Returns &amp; Exchanges</Link>
             </li>
           </ul>
         </div>
@@ -173,19 +174,19 @@ export default function FooterView() {
       </div>
       <div className="footer-bottom">
         <div className="container d-flex justify-content-between">
-          <p>Copyright © 2021 TTB Store.</p>
+          <p>Copyright © 2022 TTB Store.</p>
           <ul className="d-flex footer-menu">
             <li>
-              <a href="http://localhost:3000/">Shop</a>
+              <Link to="/">Shop</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">About Us</a>
+              <Link to="/">About Us</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">Contact US</a>
+              <Link to="/">Contact US</Link>
             </li>
             <li>
-              <a href="http://localhost:3000/">Blog</a>
+              <Link to="/">Blog</Link>
             </li>
           </ul>
         </div>
