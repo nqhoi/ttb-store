@@ -18,7 +18,7 @@ function ProductDetail(props) {
   restDetail = helpers.convertProductValue(type, restDetail);
 
   return (
-    <div className="Product-detail container m-t-20">
+    <div className="Product-detail container m-t-20 m-b-30">
       <Row gutter={[16, 24]}>
         {/* Hiển thị đường dẫn trang */}
         <Col span={24} className="page-position d-flex ">

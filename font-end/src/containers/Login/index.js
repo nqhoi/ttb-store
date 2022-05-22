@@ -37,7 +37,7 @@ function Login() {
         localStorage.setItem(constants.ACCESS_TOKEN_KEY, data.token);
       dispatch(authReducers.setIsAuth(true));
       setTimeout(() => {
-        history.push("/");
+        history.goBack();
       }, constants.DELAY_TIME);
     } catch (error) {
       message.error("Lỗi đăng nhập.");

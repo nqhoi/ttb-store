@@ -21,7 +21,7 @@ function CartOverview(props) {
 
   //: cập nhật số lượng sản phẩm trong cart
   const onUpdateNumOfProd = (key, value) => {
-    dispatch(cartReducer.updateCartItem(key, value));
+    dispatch(cartReducer.updateCartItem(key, value || 1));
   };
 
   return (

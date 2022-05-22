@@ -60,7 +60,7 @@
   &-3 {
     flex: 3;
   }
-  
+
   &-wrap {
     flex-wrap: wrap;
   }
@@ -123,6 +123,16 @@
   }
   &-h-100 {
     max-height: 100%;
+  }
+}
+
+//min-width, min-height
+.min {
+  &-w-100 {
+    min-width: 100vw;
+  }
+  &-h-100 {
+    min-height: 100vh;
   }
 }
 

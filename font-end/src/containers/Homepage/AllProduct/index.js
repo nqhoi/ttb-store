@@ -15,7 +15,7 @@ function AllProduct() {
     let isSubscribe = true;
     const getAllProducts = async () => {
       try {
-        const reponse = await productApi.getAllProducts(page, 20);
+        const reponse = await productApi.getAllProducts(page, 12);
         if (reponse && isSubscribe) {
           const { data, count } = reponse.data;
           setList(data);
@@ -72,7 +72,7 @@ function AllProduct() {
             <Pagination
               className="t-center"
               current={page}
-              pageSize={20}
+              pageSize={12}
               total={total}
               onChange={(e) => setPage(e)}
               showSizeChanger={false}

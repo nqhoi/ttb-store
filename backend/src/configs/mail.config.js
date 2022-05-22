@@ -10,6 +10,10 @@ const option = {
     user: process.env.NODE_MAILER_USER,
     pass: process.env.NODE_MAILER_PASSWORD,
   },
+  tls: {
+    // do not fail on invalid certs
+    rejectUnauthorized: false,
+  },
 };
 
 const transporter = nodemailer.createTransport(option);

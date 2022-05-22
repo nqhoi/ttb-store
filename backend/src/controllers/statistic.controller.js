@@ -310,7 +310,7 @@ const getTopProvinceOrder2 = async (req, res, next) => {
 //api: thống kê sản phẩm có nhiều đơn đặt hàng
 const getTopProductOrder = async (req, res, next) => {
   try {
-    // lấy danh sách top 10 sản phẩm
+    // lấy danh sách top 12 sản phẩm
     const topList = await OrderModel.aggregate([
       {
         $group: {
@@ -366,7 +366,7 @@ const getTopProductOrder2 = async (req, res, next) => {
         $sort: { count: -1 },
       },
       {
-        $limit: 10,
+        $limit: 12,
       },
     ]);
 
@@ -447,9 +447,6 @@ const getProductListRevenue2 = async (req, res, next) => {
   try {
 
     const list = await OrderDetailsModel.aggregate([
-      // {
-      //   $match: { orderStatus: 6}
-      // },
       {
         $group: {
           _id: "$orderProd.id",

@@ -95,7 +95,7 @@ function DiscountList() {
         <Col span={24} md={18}>
           <RelatedProduct
             type={list[indexHeader].type}
-            span={{ span: 24, xs: 24, sm: 12, md: 12, lg: 6, xl: 6, xxl: 6 }}
+            span={{ span: 24, xs: 24, sm: 12, md: 12, lg: 8, xl: 6, xxl: 6 }}
           />
         </Col>
       </Row>
