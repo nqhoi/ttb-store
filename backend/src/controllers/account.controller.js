@@ -44,6 +44,9 @@ const postSendVerifyCode = async (req, res) => {
 
     //if success
     if (result) {
+      setTimeout(async () =>  {
+        await VerifyModel.findOneAndDelete({ email });
+      },60000)
       return res.status(200).json({ message: "success" });
     }
   } catch (error) {
@@ -138,6 +141,9 @@ const postSendCodeForgotPW = async (req, res, next) => {
 
     //if success
     if (result) {
+      setTimeout(async () =>  {
+        await VerifyModel.findOneAndDelete({ email });
+      },60000)
       return res.status(200).json({ message: "success" });
     }
   } catch (error) {
@@ -167,7 +173,10 @@ const postResetPassword = async (req, res, next) => {
 
     const response = await AccountModel.updateOne(
       { email, authType: "local" },
-      { password: hashPassword }
+      {
+        password: hashPassword,
+        failedLoginTimes: 0
+      }
     );
 
     //check response -> return client

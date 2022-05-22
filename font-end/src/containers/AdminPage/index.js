@@ -33,50 +33,62 @@ const mainColor = "#212121";
 const menuList = [
   {
     key: "d",
-    title: "Dashboard",
+    // title: "Dashboard",
+    title: "Thống kê",
     icon: <DashboardOutlined />,
     children: [
-      { key: "d0", title: "Revenue", icon: <CaretRightOutlined /> },
-      { key: "d1", title: "Orders", icon: <CaretRightOutlined /> },
-      { key: "d2", title: "Product", icon: <CaretRightOutlined /> },
+      // { key: "d0", title: "Revenue", icon: <CaretRightOutlined /> },
+      // { key: "d1", title: "Orders", icon: <CaretRightOutlined /> },
+      // { key: "d2", title: "Product", icon: <CaretRightOutlined /> },
+      { key: "d0", title: "Danh thu", icon: <CaretRightOutlined /> },
+      { key: "d1", title: "Đơn hàng", icon: <CaretRightOutlined /> },
+      { key: "d2", title: "Sản phẩm", icon: <CaretRightOutlined /> },
     ],
   },
   {
     key: "ca",
-    title: "Category",
+    // title: "Category",
+    title: "Danh mục",
     icon: <MenuOutlined />,
     children: [],
   },
   {
     key: "p",
-    title: "Products",
+    // title: "Products",
+    title: "Sản phẩm",
     icon: <ShoppingCartOutlined />,
     children: [
-      { key: "p0", title: "See", icon: <EyeOutlined /> },
-      { key: "p1", title: "Add", icon: <PlusCircleOutlined /> },
+      // { key: "p0", title: "See", icon: <EyeOutlined /> },
+      // { key: "p1", title: "Add", icon: <PlusCircleOutlined /> },
+      { key: "p0", title: "Xem", icon: <EyeOutlined /> },
+      { key: "p1", title: "Thêm", icon: <PlusCircleOutlined /> },
     ],
   },
   {
     key: "cu",
-    title: "Customers",
+    // title: "Customers",
+    title: "Người dùng",
     icon: <UserOutlined />,
     children: [],
   },
   {
     key: "a",
-    title: "Amin Users",
+    // title: "Amin Users",
+    title: "Quản trị viên",
     icon: <IdcardOutlined />,
     children: [],
   },
   {
     key: "o",
-    title: "Order List",
+    // title: "Order List",
+    title: "Đơn hàng",
     icon: <ReconciliationOutlined />,
     children: [],
   },
   {
     key: "m",
-    title: "Marketing",
+    // title: "Marketing",
+    title: "Quảng cáo",
     icon: <NotificationOutlined />,
     children: [],
   },
@@ -192,7 +204,8 @@ function AdminPage() {
             </div>
             <div className="flex-grow-1 d-flex align-items-center">
               <h2 className="t-color-primary flex-grow-1 p-l-44 main-title">
-                <span>Admin Page &gt; </span>
+                {/* <span>Admin Page &gt; </span> */}
+                <span>Trang quản trị &gt; </span>
                 <span className="option-title">
                   {showTitleSelected(keyMenu)}
                 </span>

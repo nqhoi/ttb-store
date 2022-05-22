@@ -166,7 +166,7 @@ function SignUp() {
                 {/* Form thông tin đăng ký */}
                 <Col className="p-b-0" span={24} md={12}>
                   <Row gutter={[0, 16]}>
-                    <h2>Thông tin tài khoản</h2>
+                    <h2 className="m-t-12">Thông tin tài khoản</h2>
                     <Col span={24}>
                       {/* email field */}
                       <FastField
@@ -249,7 +249,7 @@ function SignUp() {
                 {/* Form thông tin chi tiết */}
                 <Col className="p-b-0" span={24} md={12}>
                   <Row gutter={[0, 16]}>
-                    <h2>Thông tin chi tiết</h2>
+                    <h2 className="m-t-12">Thông tin chi tiết</h2>
                     <Col span={24}>
                       {/* full name filed */}
                       <FastField
@@ -329,7 +329,7 @@ function SignUp() {
                     className="login-gg m-0-auto"
                     title={windowWidth > 375 ? "Đăng nhập với Gmail" : "Gmail"}
                   />
-                  <div className="m-t-10 font-weight-500">
+                  <div className="m-t-20 m-b-20 font-weight-500">
                     Bạn đã có tài khoản ?
                     <Link to={constants.ROUTES.LOGIN}>&nbsp;Đăng nhập</Link>
                   </div>

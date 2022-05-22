@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import productApi from "apis/productApi";
 import GlobalLoading from "components/Loading/Global";
 import ProductDetail from "components/ProductDetail";
@@ -6,11 +7,16 @@ import { Redirect, useParams } from "react-router-dom";
 
 function ProductDetailPage() {
   const { productId } = useParams();
-  const [ product, setProduct ] = useState(null);
-  const [ isNotFoundProduct, setIsNotFoundProduct ] = useState(false);
+  const [product, setProduct] = useState(null);
+  const [isNotFoundProduct, setIsNotFoundProduct] = useState(false);
 
   // Lấy sản phẩm
   useEffect(() => {
+    document.querySelector("body").scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
     let isSubscribe = true;
     const getProduct = async (id) => {
       try {
@@ -35,7 +41,9 @@ function ProductDetailPage() {
         {product ? (
           <ProductDetail products={product} />
         ) : (
-          <GlobalLoading content="Đang tải sản phẩm ..." />
+          <div className="min-h-100">
+            <GlobalLoading content="Đang tải sản phẩm ..." />
+          </div>
         )}
         {isNotFoundProduct && <Redirect to="/not-found" />}
       </>

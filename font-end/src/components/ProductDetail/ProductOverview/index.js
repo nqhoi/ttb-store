@@ -83,7 +83,7 @@ function ProductOverview(props) {
       code,
       name,
       price,
-      amount: numOfProduct,
+      amount: numOfProduct || 1,
       avt,
       discount,
       stock,
@@ -176,7 +176,7 @@ function ProductOverview(props) {
               <InputNumber
                 name="numOfProduct"
                 size="middle"
-                value={numOfProduct}
+                value={numOfProduct || 1}
                 min={1}
                 max={currentStock}
                 onChange={(value) => setNumberOfProduct(value)}

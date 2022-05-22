@@ -68,11 +68,11 @@ function HeaderView() {
   // event: get event change window width
   useEffect(() => {
     const w = window.innerWidth;
-    if (w <= 992) setIsMdDevice(true);
+    if (w <= 1200) setIsMdDevice(true);
     if (w <= 480) setIsSmDevice(true);
     const _aa = () => {
       const width = window.innerWidth;
-      if (width <= 992) {
+      if (width <= 1200) {
         setIsMdDevice(true);
       } else {
         setIsMdDevice(false);
