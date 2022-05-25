@@ -43,7 +43,7 @@ function Evaluation(props) {
       const response = await commentApi.updateComment(id, value);
       if (response && response.status === 200) {
         const newList = cmtList.map((item) =>
-        item._id !== id ? item : { ...item, ...value }
+        item._id !== id ? item : { ...item, content: value }
         );
         setCmtList(newList);
         message.success("Cập nhật thành công");

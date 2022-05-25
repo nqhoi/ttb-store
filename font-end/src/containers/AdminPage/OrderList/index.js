@@ -75,7 +75,8 @@ function OrderList() {
     {
       title: "khách hàng",
       key: "owner",
-      dataIndex: "owner",
+      dataIndex: "deliveryAdd",
+      render: (deliveryAdd) => deliveryAdd.name
     },
     {
       title: "Mã đơn hàng",
