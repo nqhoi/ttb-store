@@ -32,19 +32,19 @@ const normalizePort = (port) => parseInt(port, 10);
 const PORT = normalizePort(process.env.PORT || 3000);
 
 // ! ================== setup ================== //
-app.use(express.static(path.join(__dirname, "../font-end/build")));
+// app.use(express.static(path.join(__dirname, "../font-end/build")));
 
-const dev = app.get("env") !== "production";
+// const dev = app.get("env") !== "production";
 
-if (!dev) {
-  app.disable("x-powered-by");
-  app.use(morgan("common"));
-  app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../font-end/build", "index.html"));
-  });
-} else {
-  app.use(morgan("dev"));
-}
+// if (!dev) {
+//   app.disable("x-powered-by");
+//   app.use(morgan("common"));
+//   app.get("/", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../font-end/build", "index.html"));
+//   });
+// } else {
+//   app.use(morgan("dev"));
+// }
 
 // ! ================== Connect mongodb with mongoose ================== //
 const mongoose = require("mongoose");
@@ -106,6 +106,6 @@ app.use("/apis/statistic", statisticApi);
 app.use("/apis/vnpay", VNpay);
 
 // Note: Khi deploy production, việc redirect các route sẽ để react giải quyết
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../font-end/build", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "../font-end/build", "index.html"));
+// });

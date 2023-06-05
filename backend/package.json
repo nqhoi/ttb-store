@@ -26,7 +26,7 @@
     "vn-payments": "^1.1.0"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "dev": "set NODE_ENV=development&&nodemon --inspect index.js",
     "test": "set NODE_ENV=production&&nodemon --inspect index.js"
   }
