@@ -1,5 +1,5 @@
 ## TTB Store là một website về cửa hàng thiết bị điện tử.
-## Link demo: https://ttb-store.herokuapp.com/
+## Link demo: https://ttb-store.vercel.app
 
 ### Tính năng
 - Đăng ký, đăng nhập.
